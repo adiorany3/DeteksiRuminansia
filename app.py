@@ -149,7 +149,7 @@ st.markdown(
     .stMarkdown p { line-height: 1.65; }
     button, a[data-testid="stLinkButton"] { min-height: 44px; }
     button:focus-visible, a:focus-visible, input:focus-visible {
-        outline: 3px solid #14532D !important;
+        outline: 3px solid var(--text-color, #14532D) !important;
         outline-offset: 3px;
     }
     @media (max-width: 640px) {
@@ -162,15 +162,21 @@ st.markdown(
         button { transition: none !important; transform: none !important; }
     }
 
+    div[data-testid="stForm"],
+    div[data-testid="stExpander"] details,
+    div[data-testid="stMetric"],
+    div[data-testid="stRadio"] label[data-baseweb="radio"] {
+        background: var(--background-color, #FFFFFF);
+        color: var(--text-color, #262730);
+    }
     div[data-testid="stForm"] {
-        background: #FFFFFF;
         border: 1px solid #C8E6C9;
         border-radius: 18px;
         padding: 1.75rem;
         box-shadow: 0 6px 24px rgba(46, 125, 50, 0.10);
     }
     div[data-testid="stForm"] h4 {
-        color: #2E7D32;
+        color: var(--text-color, #262730);
         border-bottom: 2px solid #E8F5E9;
         padding-bottom: 0.35rem;
     }
@@ -179,7 +185,8 @@ st.markdown(
         font-weight: 700;
         padding: 0.85rem;
         border-radius: 14px;
-        background: linear-gradient(135deg, #2E7D32, #43A047);
+        background: linear-gradient(135deg, #164E2B, #27653D);
+        color: #FFFFFF;
         border: none;
         box-shadow: 0 4px 12px rgba(46, 125, 50, 0.35);
         transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -200,15 +207,14 @@ st.markdown(
     }
     .hero .hero-icon { font-size: 3rem; line-height: 1; }
     .hero h1 { color: #FFFFFF; font-size: 2.1rem; margin: 0.35rem 0; padding: 0; letter-spacing: 0.3px; }
-    .hero p { margin: 0 auto; font-size: 1.08rem; max-width: 34rem; opacity: 0.95; }
+    .hero p { color: #FFFFFF; margin: 0 auto; font-size: 1.08rem; max-width: 34rem; opacity: 0.95; }
+    div[data-testid="stForm"] button[kind="primaryFormSubmit"] p { color: inherit; }
 
     div[data-testid="stExpander"] details {
         border-radius: 14px;
         border: 1px solid #C8E6C9;
-        background: #FFFFFF;
     }
     div[data-testid="stMetric"] {
-        background: #FFFFFF;
         border: 1px solid #C8E6C9;
         border-radius: 14px;
         padding: 0.75rem;
@@ -216,7 +222,6 @@ st.markdown(
         box-shadow: 0 2px 8px rgba(46, 125, 50, 0.08);
     }
     div[data-testid="stRadio"] label[data-baseweb="radio"] {
-        background: #FFFFFF;
         border: 1px solid #C8E6C9;
         border-radius: 12px;
         padding: 0.5rem 0.9rem;
@@ -224,10 +229,10 @@ st.markdown(
     }
     .app-footer {
         text-align: center;
-        color: #5B7C62;
+        color: var(--text-color, #262730);
         padding: 0.75rem 0 1.25rem 0;
     }
-    .app-footer a { color: #2E7D32; font-weight: 600; text-decoration: none; }
+    .app-footer a { color: inherit; font-weight: 600; text-decoration: underline; }
     </style>
     """,
     unsafe_allow_html=True,

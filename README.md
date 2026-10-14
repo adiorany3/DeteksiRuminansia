@@ -5,6 +5,7 @@ Versi Streamlit berbahasa Indonesia dari notebook Kaggle `fall2fire/lifestock-di
 ## Perbaikan dibanding notebook asli
 
 - Antarmuka dan kategori diterjemahkan ke Bahasa Indonesia.
+- Panel mengikuti tema terang/gelap Streamlit; teks banner dan tombol prediksi tetap putih pada latar hijau gelap.
 - Pipeline menyimpan rekayasa fitur, encoding, dan model sebagai satu artefak.
 - `OneHotEncoder` menggantikan `LabelEncoder`, sehingga kategori nominal tidak dianggap memiliki urutan angka.
 - Pembagian data dilakukan sebelum model dilatih dan menggunakan stratifikasi.
