@@ -149,7 +149,7 @@ st.markdown(
     .stMarkdown p { line-height: 1.65; }
     button, a[data-testid="stLinkButton"] { min-height: 44px; }
     button:focus-visible, a:focus-visible, input:focus-visible {
-        outline: 3px solid var(--text-color, #14532D) !important;
+        outline: 3px solid currentColor !important;
         outline-offset: 3px;
     }
     @media (max-width: 640px) {
@@ -166,8 +166,8 @@ st.markdown(
     div[data-testid="stExpander"] details,
     div[data-testid="stMetric"],
     div[data-testid="stRadio"] label[data-baseweb="radio"] {
-        background: var(--background-color, #FFFFFF);
-        color: var(--text-color, #262730);
+        background: transparent;
+        color: inherit;
     }
     div[data-testid="stForm"] {
         border: 1px solid #C8E6C9;
@@ -176,7 +176,7 @@ st.markdown(
         box-shadow: 0 6px 24px rgba(46, 125, 50, 0.10);
     }
     div[data-testid="stForm"] h4 {
-        color: var(--text-color, #262730);
+        color: inherit;
         border-bottom: 2px solid #E8F5E9;
         padding-bottom: 0.35rem;
     }
@@ -229,7 +229,7 @@ st.markdown(
     }
     .app-footer {
         text-align: center;
-        color: var(--text-color, #262730);
+        color: inherit;
         padding: 0.75rem 0 1.25rem 0;
     }
     .app-footer a { color: inherit; font-weight: 600; text-decoration: underline; }
