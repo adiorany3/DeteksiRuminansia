@@ -87,8 +87,9 @@ def load_dataset(path: str | Path) -> pd.DataFrame:
     return frame
 
 
-def create_pipeline(random_state: int = 42, n_estimators: int = 300) -> Pipeline:
-    # min_samples_leaf=1 terukur lebih akurat (0.834 vs 0.831); plafon representasi 0.840.
+def create_pipeline(random_state: int = 42, n_estimators: int = 150) -> Pipeline:
+    # 150 pohon: memori model ~setengah dari 300 (44 vs 88 MB) untuk Streamlit Cloud,
+    # latensi prediksi setara; min_samples_leaf=1 terukur lebih akurat (0.834 vs 0.831).
     categorical = ["Hewan", "Kelompok Usia", "Kategori Suhu"]
     return Pipeline([
         ("fitur", FunctionTransformer(engineer_features, validate=False)),
@@ -98,7 +99,7 @@ def create_pipeline(random_state: int = 42, n_estimators: int = 300) -> Pipeline
         )),
         ("model", RandomForestClassifier(
             n_estimators=n_estimators, class_weight="balanced", random_state=random_state,
-            n_jobs=-1, min_samples_leaf=1,
+            n_jobs=1, min_samples_leaf=1,
         )),
     ])
 

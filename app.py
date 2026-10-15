@@ -134,7 +134,12 @@ DISEASE_INFO = {
     },
 }
 
-st.set_page_config(page_title="Prediksi Penyakit Ternak", page_icon="🐄", layout="centered")
+st.set_page_config(
+    page_title="Ruminansia Care · Prediksi Penyakit",
+    page_icon="🐄",
+    layout="wide",
+    initial_sidebar_state="collapsed",
+)
 st.markdown(
     """
     <style>
@@ -145,18 +150,24 @@ st.markdown(
     a[class*="viewerBadge"], div[class*="viewerBadge"],
     div[data-testid="stAppDeployButton"] { display: none !important; visibility: hidden !important; }
 
-    .block-container { padding-top: 1.5rem; max-width: 46rem; }
+    :root { --ink: #18352a; --muted: #5d7067; --green: #1f6b4a; --mint: #eaf7ef; --line: #d7e8dc; }
+    .stApp { background: linear-gradient(180deg, #f7fbf8 0%, #ffffff 45%); color: var(--ink); }
+    .block-container { padding: 2.5rem 3rem 1.5rem; max-width: 80rem; }
     .stMarkdown p { line-height: 1.65; }
+    h1, h2, h3, h4 { color: var(--ink); letter-spacing: -0.02em; }
     button, a[data-testid="stLinkButton"] { min-height: 44px; }
     button:focus-visible, a:focus-visible, input:focus-visible {
-        outline: 3px solid currentColor !important;
+        outline: 3px solid #52a879 !important;
         outline-offset: 3px;
     }
-    @media (max-width: 640px) {
-        .block-container { padding: 1rem; }
+    div[data-testid="stAlert"] { border-radius: 14px; border: 1px solid var(--line); }
+    div[data-testid="stVerticalBlockBorderWrapper"] { border-color: var(--line); border-radius: 18px; }
+    div[data-testid="stHorizontalBlock"] { gap: 1.25rem; }
+    @media (max-width: 800px) {
+        .block-container { padding: 1.25rem 1rem; }
         div[data-testid="stForm"] { padding: 1rem !important; }
-        .hero { padding: 1.25rem 1rem !important; }
-        .hero h1 { font-size: 1.6rem !important; }
+        .hero { padding: 1.35rem 1rem !important; }
+        .hero h1 { font-size: 1.75rem !important; }
     }
     @media (prefers-reduced-motion: reduce) {
         button { transition: none !important; transform: none !important; }
@@ -166,73 +177,87 @@ st.markdown(
     div[data-testid="stExpander"] details,
     div[data-testid="stMetric"],
     div[data-testid="stRadio"] label[data-baseweb="radio"] {
-        background: transparent;
+        background: #ffffff;
         color: inherit;
     }
     div[data-testid="stForm"] {
-        border: 1px solid #C8E6C9;
-        border-radius: 18px;
-        padding: 1.75rem;
-        box-shadow: 0 6px 24px rgba(46, 125, 50, 0.10);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 2rem;
+        box-shadow: 0 12px 32px rgba(31, 107, 74, 0.09);
     }
     div[data-testid="stForm"] h4 {
-        color: inherit;
-        border-bottom: 2px solid #E8F5E9;
-        padding-bottom: 0.35rem;
+        color: var(--ink);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 0.55rem;
+        margin-top: 0.8rem;
     }
     div[data-testid="stForm"] button[kind="primaryFormSubmit"] {
-        font-size: 1.25rem;
+        font-size: 1.1rem;
         font-weight: 700;
-        padding: 0.85rem;
-        border-radius: 14px;
-        background: linear-gradient(135deg, #164E2B, #27653D);
+        padding: 0.8rem;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #195c3e, #2f8b61);
         color: #FFFFFF;
         border: none;
-        box-shadow: 0 4px 12px rgba(46, 125, 50, 0.35);
+        box-shadow: 0 6px 14px rgba(31, 107, 74, 0.25);
         transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     div[data-testid="stForm"] button[kind="primaryFormSubmit"]:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(46, 125, 50, 0.45);
+        box-shadow: 0 9px 18px rgba(31, 107, 74, 0.32);
     }
 
     .hero {
-        background: linear-gradient(135deg, #164E2B, #27653D);
+        background: radial-gradient(circle at 90% 10%, rgba(159, 226, 184, 0.32), transparent 34%), linear-gradient(135deg, #123d2b, #26734f);
         color: #FFFFFF;
-        border-radius: 18px;
-        padding: 2rem 1.5rem;
-        text-align: center;
-        margin-bottom: 1.25rem;
-        box-shadow: 0 8px 28px rgba(27, 94, 32, 0.30);
+        border-radius: 24px;
+        padding: 2.75rem 2rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 14px 36px rgba(18, 61, 43, 0.24);
     }
-    .hero .hero-icon { font-size: 3rem; line-height: 1; }
-    .hero h1 { color: #FFFFFF; font-size: 2.1rem; margin: 0.35rem 0; padding: 0; letter-spacing: 0.3px; }
-    .hero p { color: #FFFFFF; margin: 0 auto; font-size: 1.08rem; max-width: 34rem; opacity: 0.95; }
+    .hero .hero-icon { font-size: 2.2rem; line-height: 1; letter-spacing: 0.2rem; }
+    .hero h1 { color: #FFFFFF; font-size: 2.55rem; margin: 0.7rem 0 0.4rem; padding: 0; letter-spacing: -0.04em; }
+    .hero p { color: #FFFFFF; margin: 0; font-size: 1.08rem; max-width: 42rem; opacity: 0.9; }
     div[data-testid="stForm"] button[kind="primaryFormSubmit"] p { color: inherit; }
 
     div[data-testid="stExpander"] details {
         border-radius: 14px;
-        border: 1px solid #C8E6C9;
+        border: 1px solid var(--line);
     }
     div[data-testid="stMetric"] {
-        border: 1px solid #C8E6C9;
+        border: 1px solid var(--line);
         border-radius: 14px;
         padding: 0.75rem;
         text-align: center;
-        box-shadow: 0 2px 8px rgba(46, 125, 50, 0.08);
+        box-shadow: 0 4px 12px rgba(31, 107, 74, 0.06);
     }
     div[data-testid="stRadio"] label[data-baseweb="radio"] {
-        border: 1px solid #C8E6C9;
+        border: 1px solid var(--line);
         border-radius: 12px;
-        padding: 0.5rem 0.9rem;
+        padding: 0.6rem 0.9rem;
         margin-right: 0.4rem;
+        transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    div[data-testid="stRadio"] label[data-baseweb="radio"]:has(input:checked) {
+        background: var(--mint);
+        border-color: #65ad83;
     }
     .app-footer {
         text-align: center;
-        color: inherit;
-        padding: 0.75rem 0 1.25rem 0;
+        color: var(--muted);
+        padding: 0.75rem 0 1.25rem;
+        font-size: 0.9rem;
     }
-    .app-footer a { color: inherit; font-weight: 600; text-decoration: underline; }
+    .app-footer a { color: var(--green); font-weight: 600; text-decoration: underline; }
+    .quick-stats { display: flex; gap: 0.75rem; margin: -0.35rem 0 1.4rem; }
+    .quick-stats div { flex: 1; background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 0.85rem 1rem; box-shadow: 0 4px 12px rgba(31, 107, 74, 0.05); }
+    .quick-stats strong, .quick-stats span { display: block; }
+    .quick-stats strong { color: var(--green); font-size: 1.35rem; }
+    .quick-stats span { color: var(--muted); font-size: 0.78rem; margin-top: 0.15rem; }
+    .notice-card { display: flex; gap: 0.8rem; align-items: flex-start; background: #fffaf0; border: 1px solid #f0dfb5; border-radius: 14px; padding: 0.9rem 1rem; margin-bottom: 1.4rem; color: #684f1d; font-size: 0.9rem; line-height: 1.5; }
+    .notice-icon { font-size: 1.25rem; line-height: 1.2; }
+    @media (max-width: 560px) { .quick-stats { gap: 0.4rem; } .quick-stats div { padding: 0.7rem 0.55rem; } .quick-stats span { font-size: 0.68rem; } }
     </style>
     """,
     unsafe_allow_html=True,
@@ -251,31 +276,30 @@ def load_model():
 st.markdown(
     """
     <div class="hero">
-        <div class="hero-icon">🐄🐃🐑🐐</div>
-        <h1>Prediksi Penyakit Ternak</h1>
-        <p>Isi kondisi ternak Anda, sistem memperkirakan penyakit beserta cara penanganan awalnya.</p>
+        <div class="hero-icon">🐄 · 🐃 · 🐑 · 🐐</div>
+        <h1>Ruminansia Care</h1>
+        <p>Screening awal penyakit ternak berbasis gejala. Isi data dengan tenang, lalu gunakan hasilnya sebagai bahan konsultasi dokter hewan.</p>
+    </div>
+    <div class="quick-stats">
+        <div><strong>4</strong><span>jenis ternak</span></div>
+        <div><strong>5</strong><span>penyakit terdeteksi</span></div>
+        <div><strong>1–3</strong><span>gejala utama</span></div>
     </div>
     """,
     unsafe_allow_html=True,
 )
-st.warning(
-    "**Bukan rujukan baku.** Hasil aplikasi ini hanya perkiraan untuk edukasi dan penapisan awal, "
-    "bukan diagnosis resmi maupun dasar pengambilan keputusan medis. Selalu konsultasikan kondisi "
-    "ternak Anda ke ahlinya: dokter hewan, mantri hewan, atau dinas peternakan setempat."
+st.markdown(
+    """
+    <div class="notice-card">
+        <span class="notice-icon">ⓘ</span>
+        <div><strong>Gunakan sebagai screening, bukan diagnosis.</strong><br>
+        Hasil bersifat edukatif dan relatif. Konfirmasi selalu ke dokter hewan, mantri hewan, atau dinas peternakan—terutama bila ternak sesak, tidak mampu berdiri, atau mati mendadak.</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
-
-st.info(
-    "**Cakupan hewan dan batas penyakit yang dapat diprediksi**\n\n"
-    "Sistem ini hanya cocok untuk ternak ruminansia: **sapi, kerbau, domba, dan kambing**. "
-    "Model dilatih khusus pada data keempat hewan tersebut, sehingga tidak berlaku untuk "
-    "unggas, babi, kuda, atau hewan peliharaan lain.\n\n"
-    "Model hanya mengenali lima pilihan penyakit:\n"
-    "- **Antraks** — infeksi bakteri yang dapat menular ke manusia.\n"
-    "- **Blackleg (radang paha)** — infeksi bakteri pada otot.\n"
-    "- **Penyakit mulut dan kuku (PMK)** — infeksi virus dengan luka/lepuh di mulut dan kuku.\n"
-    "- **Lumpy skin disease (LSD / virus lumpy)** — penyakit benjolan kulit terutama pada sapi dan kerbau.\n"
-    "- **Pneumonia (radang paru-paru)** — gangguan paru-paru yang dapat menyebabkan batuk dan sesak napas."
-)
+st.markdown("### Mulai pemeriksaan", help="Isi data ternak untuk mendapatkan tiga kemungkinan penyakit teratas.")
+st.caption("Data tidak dikirim otomatis. Pilih gejala yang benar-benar terlihat saat ini.")
 with st.expander("Pahami batasan hasil sebelum menggunakan prediksi"):
     st.write(
         "Aplikasi tidak mengenali semua penyakit ternak, misalnya cacingan, kembung, mastitis, "
@@ -296,13 +320,13 @@ with st.expander("Pahami batasan hasil sebelum menggunakan prediksi"):
 
 with st.form("form_prediksi"):
     st.markdown("#### 1️⃣ Pilih jenis hewan")
-    hewan_label = st.radio("Jenis hewan", list(HEWAN_LABEL), horizontal=True, label_visibility="collapsed")
+    hewan_label = st.radio("Jenis hewan", list(HEWAN_LABEL), horizontal=True, label_visibility="collapsed", key="hewan")
     hewan = HEWAN_LABEL[hewan_label]
 
     st.markdown("#### 2️⃣ Kondisi ternak")
     col1, col2 = st.columns(2)
     with col1:
-        poel = st.selectbox("Poel gigi (perkiraan umur)", POEL_OPTIONS, index=2)
+        poel = st.selectbox("Poel gigi (perkiraan umur)", POEL_OPTIONS, index=2, key="poel")
         st.warning(
             "Konversi poel ke umur di aplikasi ini masih sementara dan belum divalidasi dokter hewan. "
             "Gigi aus/tanggal tidak cukup untuk menentukan umur pasti; kesalahan umur dapat memengaruhi prediksi."
@@ -319,7 +343,7 @@ with st.form("form_prediksi"):
             "Hasilnya perkiraan, bukan umur pasti; dipengaruhi ras, pakan, dan lingkungan."
         )
     with col2:
-        suhu = st.number_input("Suhu tubuh (°C)", min_value=32.3, max_value=43.3, value=38.9, step=0.1)
+        suhu = st.number_input("Suhu tubuh (°C)", min_value=32.3, max_value=43.3, value=38.9, step=0.1, key="suhu")
         st.caption("Suhu normal sapi/kerbau/domba/kambing sekitar 38,0–39,5 °C.")
 
     st.markdown("#### 3️⃣ Pilih gejala yang terlihat (1 sampai 3 gejala)")
@@ -330,6 +354,7 @@ with st.form("form_prediksi"):
         max_selections=3,
         label_visibility="collapsed",
         placeholder="Pilih 1-3 gejala",
+        key="gejala",
     )
     st.caption("Semakin lengkap gejala yang dipilih, semakin akurat perkiraan penyakit.")
     with st.expander("ℹ️ Keterangan semua gejala"):
